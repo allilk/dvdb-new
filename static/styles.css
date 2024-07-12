@@ -1,0 +1,33 @@
+:root {
+    --dvdb-purple: #22223b;
+    --dvdb-offwhite: #edf2f7;
+    --bulma-primary-h: 240deg;
+    --bulma-primary-s: 27%;
+    --bulma-primary-l: 18%;
+
+    background-color: var(--dvdb-offwhite);
+}
+
+.shopping-cart-button {
+    display: flex;
+    justify-content: space-between;
+    width: 125px;
+}
+
+.bg-dvdb-purple {
+    background-color: var(--dvdb-purple);
+}
+
+#homeNavbar {
+    position: relative;
+}
+
+#homeNavbar .navbar-end {
+    position: absolute;
+    top: -2.5rem;
+    right: 0.5rem;
+}
+
+#homeNavbar a.navbar-item:hover {
+    color: white !important;
+}
