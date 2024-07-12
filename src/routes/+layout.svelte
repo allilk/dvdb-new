@@ -1,4 +1,6 @@
 <script>
+    import { page } from "$app/stores";
+    import { signOut } from "@auth/sveltekit/client";
 </script>
 
 <div class="container">
@@ -20,9 +22,22 @@
         <div class="hero-foot">
             <div id="homeNavbar" class="navbar-menu px-2 py-1">
                 <div class="navbar-end">
-                    <a class="navbar-item has-text-grey-lighter" href="/login">
-                        Login
-                    </a>
+                    {#if !$page.data.session}
+                        <a
+                            class="navbar-item has-text-grey-lighter"
+                            href="/login"
+                        >
+                            Login
+                        </a>
+                    {:else}
+                        <button
+                            class="navbar-item has-text-grey-lighter"
+                            on:click={() => signOut()}
+                        >
+                            Logout
+                        </button>
+                    {/if}
+
                     <a class="navbar-item has-text-grey-lighter" href="/">
                         <span class="icon mt-1">
                             <i class="fab fa-discord"></i>

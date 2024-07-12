@@ -1,7 +1,14 @@
 <script>
-    import { signIn, signOut } from "@auth/sveltekit/client";
+    import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
+    import { signIn } from "@auth/sveltekit/client";
+    import { onMount } from "svelte";
 
-    let password = "";
+    onMount(() => {
+        if ($page.data.session) {
+            goto("/");
+        }
+    });
 </script>
 
 <!-- <nav>
