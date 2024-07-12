@@ -31,3 +31,25 @@
 #homeNavbar a.navbar-item:hover {
     color: white !important;
 }
+
+.login-button,
+.login-fields,
+.login-hr {
+    width: 100%;
+}
+
+.login-hr {
+    margin: auto;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .login-button,
+    .login-hr {
+        width: 60%;
+    }
+    .login-fields {
+        width: 50%;
+    }
+}
