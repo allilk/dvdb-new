@@ -53,3 +53,23 @@
         width: 50%;
     }
 }
+
+.disable-scrolling {
+    overflow: hidden;
+}
+
+.show {
+    display: block !important;
+}
+.mobile-menu {
+    display: none;
+    background-color: var(--dvdb-purple);
+    overflow: hidden;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 100%;
+}
