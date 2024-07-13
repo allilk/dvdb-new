@@ -5,6 +5,21 @@
     import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
 
+    const loggedInMenuLinks = [
+        {
+            name: "Home",
+            href: "/",
+        },
+        {
+            name: "Blog",
+            href: "/posts",
+        },
+        {
+            name: "Logout",
+            href: "/",
+        },
+    ];
+
     const toggleMenu = () => {
         const menu = document.querySelector(".mobile-menu");
         menu.classList.toggle("show");
@@ -37,7 +52,6 @@
 </script>
 
 <div class="container mobile-menu">
-    <!-- list of menu options -->
     <BurgerMenu {toggleMenu} />
 
     <aside class="menu p-4">
@@ -48,9 +62,15 @@
                     <a href="/login">Login</a>
                 </li>
             {:else}
-                <li>
-                    <button on:click={() => signOut()}>Logout</button>
-                </li>
+                {#each loggedInMenuLinks as link}
+                    <a
+                        class="navbar-item has-text-grey-lighter"
+                        href={link.href}
+                        on:click={() => link.name === "Logout" && signOut()}
+                    >
+                        {link.name}
+                    </a>
+                {/each}
             {/if}
         </ul>
     </aside>
@@ -79,12 +99,16 @@
                             Login
                         </a>
                     {:else}
-                        <button
-                            class="navbar-item has-text-grey-lighter"
-                            on:click={() => signOut()}
-                        >
-                            Logout
-                        </button>
+                        {#each loggedInMenuLinks as link}
+                            <a
+                                class="navbar-item has-text-grey-lighter"
+                                href={link.href}
+                                on:click={() =>
+                                    link.name === "Logout" && signOut()}
+                            >
+                                {link.name}
+                            </a>
+                        {/each}
                     {/if}
 
                     <a class="navbar-item has-text-grey-lighter" href="/">

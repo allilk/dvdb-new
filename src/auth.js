@@ -1,8 +1,10 @@
 import { SvelteKitAuth } from "@auth/sveltekit";
 import Discord from "@auth/sveltekit/providers/discord";
 import { env } from "$env/dynamic/private";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import clientPromise from "./lib/db";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+
+export const prisma = new PrismaClient();
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
     providers: [
@@ -13,5 +15,12 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     ],
     secret: env.AUTH_SECRET,
     trustHost: true,
-    adapter: MongoDBAdapter(clientPromise),
+    adapter: PrismaAdapter(prisma),
+    callbacks: {
+        async session({ session, user }) {
+            session.user.id = user.id;
+
+            return session;
+        },
+    },
 });
