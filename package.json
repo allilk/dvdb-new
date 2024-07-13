@@ -1,33 +1,33 @@
 {
-	"name": "shop",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"lint": "eslint ."
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"@types/eslint": "^8.56.7",
-		"eslint": "^9.0.0",
-		"eslint-plugin-svelte": "^2.36.0",
-		"globals": "^15.0.0",
-		"prisma": "^5.16.2",
-		"svelte": "^4.2.7",
-		"vite": "^5.0.3"
-	},
-	"type": "module",
-	"dependencies": {
-		"@auth/mongodb-adapter": "^3.4.1",
-		"@auth/prisma-adapter": "^2.4.1",
-		"@auth/sveltekit": "^1.4.1",
-		"@fortawesome/fontawesome-free": "^6.5.2",
-		"@prisma/client": "^5.16.2",
-		"bulma-toast": "^2.4.4",
-		"mongodb": "^6.8.0"
-	}
+    "name": "shop",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "vite dev",
+        "build": "prisma generate && vite build",
+        "preview": "vite preview",
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "^3.0.0",
+        "@sveltejs/kit": "^2.0.0",
+        "@sveltejs/vite-plugin-svelte": "^3.0.0",
+        "@types/eslint": "^8.56.7",
+        "eslint": "^9.0.0",
+        "eslint-plugin-svelte": "^2.36.0",
+        "globals": "^15.0.0",
+        "prisma": "^5.16.2",
+        "svelte": "^4.2.7",
+        "vite": "^5.0.3"
+    },
+    "type": "module",
+    "dependencies": {
+        "@auth/mongodb-adapter": "^3.4.1",
+        "@auth/prisma-adapter": "^2.4.1",
+        "@auth/sveltekit": "^1.4.1",
+        "@fortawesome/fontawesome-free": "^6.5.2",
+        "@prisma/client": "^5.16.2",
+        "bulma-toast": "^2.4.4",
+        "mongodb": "^6.8.0"
+    }
 }
