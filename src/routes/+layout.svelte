@@ -84,7 +84,7 @@
 </div>
 
 <div class="container main">
-    <section class="hero is-primary">
+    <section class="hero is-primary layout-hero">
         <div class="hero-body is-flex">
             <a class="is-clickable" href="/">
                 <p class="title has-text-white">dvdb</p>
@@ -117,7 +117,7 @@
             </div>
         </div>
     </section>
-    <section class="section has-background-white pb-6">
+    <section class="layout-section section has-background-white pb-6">
         <slot />
         <div class="py-6" />
         <div class="py-6" />

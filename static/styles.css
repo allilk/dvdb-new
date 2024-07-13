@@ -44,16 +44,6 @@
     margin-bottom: 0.75rem;
 }
 
-@media (min-width: 768px) {
-    .login-button,
-    .login-hr {
-        width: 60%;
-    }
-    .login-fields {
-        width: 50%;
-    }
-}
-
 .disable-scrolling {
     overflow: hidden;
 }
@@ -74,6 +64,32 @@
     height: 100%;
 }
 
+.layout-hero .hero-body {
+    --bulma-hero-body-padding: 1rem 1.5rem;
+}
+
+.layout-section {
+    --bulma-section-padding: 1.25rem 1rem;
+}
+
 .blog-post {
     /* --bulma-card-shadow: none; */
+}
+
+@media (min-width: 768px) {
+    .login-button,
+    .login-hr {
+        width: 60%;
+    }
+    .login-fields {
+        width: 50%;
+    }
+
+    .layout-hero .hero-body {
+        --bulma-hero-body-padding: 3rem 1.5rem;
+    }
+
+    .layout-section {
+        --bulma-section-padding: 3rem 1.5rem;
+    }
 }
