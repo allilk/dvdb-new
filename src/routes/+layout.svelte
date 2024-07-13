@@ -5,7 +5,7 @@
     import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
 
-    const loggedInMenuLinks = [
+    const normalUserMenuLinks = [
         {
             name: "Home",
             href: "/",
@@ -14,11 +14,24 @@
             name: "Blog",
             href: "/posts",
         },
+    ];
+    const unloggedInMenuLinks = [
+        {
+            name: "Login",
+            href: "/login",
+        },
+    ];
+    const loggedInMenuLinks = [
         {
             name: "Logout",
             href: "/",
         },
     ];
+    let menuLinks = normalUserMenuLinks;
+
+    $: menuLinks = normalUserMenuLinks.concat(
+        $page.data.session ? loggedInMenuLinks : unloggedInMenuLinks
+    );
 
     const toggleMenu = () => {
         const menu = document.querySelector(".mobile-menu");
@@ -57,21 +70,15 @@
     <aside class="menu p-4">
         <a class="menu-label" href="/">dvdb</a>
         <ul class="menu-list">
-            {#if !$page.data.session}
-                <li>
-                    <a href="/login">Login</a>
-                </li>
-            {:else}
-                {#each loggedInMenuLinks as link}
-                    <a
-                        class="navbar-item has-text-grey-lighter"
-                        href={link.href}
-                        on:click={() => link.name === "Logout" && signOut()}
-                    >
-                        {link.name}
-                    </a>
-                {/each}
-            {/if}
+            {#each menuLinks as link}
+                <a
+                    class="navbar-item has-text-grey-lighter"
+                    href={link.href}
+                    on:click={() => link.name === "Logout" && signOut()}
+                >
+                    {link.name}
+                </a>
+            {/each}
         </ul>
     </aside>
 </div>
@@ -91,25 +98,15 @@
         <div class="hero-foot">
             <div id="homeNavbar" class="navbar-menu px-2 py-1">
                 <div class="navbar-end">
-                    {#if !$page.data.session}
+                    {#each menuLinks as link}
                         <a
                             class="navbar-item has-text-grey-lighter"
-                            href="/login"
+                            href={link.href}
+                            on:click={() => link.name === "Logout" && signOut()}
                         >
-                            Login
+                            {link.name}
                         </a>
-                    {:else}
-                        {#each loggedInMenuLinks as link}
-                            <a
-                                class="navbar-item has-text-grey-lighter"
-                                href={link.href}
-                                on:click={() =>
-                                    link.name === "Logout" && signOut()}
-                            >
-                                {link.name}
-                            </a>
-                        {/each}
-                    {/if}
+                    {/each}
 
                     <a class="navbar-item has-text-grey-lighter" href="/">
                         <span class="icon mt-1">

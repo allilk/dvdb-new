@@ -13,12 +13,15 @@ export async function load() {
             title: true,
             content: true,
             createdAt: true,
+            tags: true,
             author: {
                 select: {
                     name: true,
+                    image: true,
                 },
             },
         },
+        take: 8,
     });
 
     return {

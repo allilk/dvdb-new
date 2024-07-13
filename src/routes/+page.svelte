@@ -1,34 +1,12 @@
 <script>
+    import BlogPost from "../components/BlogPost.svelte";
+
     export let data;
 </script>
 
 <div class="container">
     <h3 class="title is-3">Recent Blog Posts</h3>
     {#each data.posts as post}
-        <div class="box">
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong class="is-size-5 has-text-weight-bold"
-                                >{post.title}</strong
-                            >
-                            <small
-                                ><u>
-                                    {post.author.name}
-                                </u></small
-                            >
-                            <small
-                                >{new Date(
-                                    post.createdAt
-                                ).toLocaleDateString()}</small
-                            >
-                            <br />
-                            {post.content}
-                        </p>
-                    </div>
-                </div>
-            </article>
-        </div>
+        <BlogPost {post} />
     {/each}
 </div>

@@ -77,6 +77,7 @@ model BlogPost {
   published Boolean
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String   @db.ObjectId
+  tags     String[] @default([])
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -73,3 +73,7 @@
     z-index: 1000;
     height: 100%;
 }
+
+.blog-post {
+    /* --bulma-card-shadow: none; */
+}

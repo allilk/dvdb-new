@@ -1,20 +1,16 @@
-import { prisma } from "../auth";
+import { prisma } from "../../../auth";
 
-// Return 3 most recent blog posts
-export async function load() {
-    const posts = await prisma.blogPost.findMany({
+export async function load(ctx) {
+    const post = await prisma.blogPost.findUnique({
         where: {
-            published: false,
+            id: ctx.params.slug,
         },
-        orderBy: {
-            createdAt: "desc",
-        },
-        take: 3,
         select: {
             id: true,
             title: true,
             content: true,
             createdAt: true,
+            tags: true,
             author: {
                 select: {
                     name: true,
@@ -25,6 +21,6 @@ export async function load() {
     });
 
     return {
-        posts,
+        post,
     };
 }
