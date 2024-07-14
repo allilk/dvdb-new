@@ -4,6 +4,7 @@
     import { afterNavigate } from "$app/navigation";
     import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
+    import { onNavigate } from "$app/navigation";
 
     const normalUserMenuLinks = [
         {
@@ -41,13 +42,6 @@
         main.classList.toggle("disable-scrolling");
     };
 
-    afterNavigate(() => {
-        // close the mobile menu when navigating to a new page
-        if (document.querySelector(".mobile-menu").classList.contains("show")) {
-            toggleMenu();
-        }
-    });
-
     onMount(() => {
         // listen for changes and close the mobile menu when screen size is greater than 1024px
         const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -60,6 +54,22 @@
             ) {
                 toggleMenu();
             }
+        });
+    });
+
+    onNavigate(() => {
+        // close the mobile menu when navigating to a new page
+        if (document.querySelector(".mobile-menu").classList.contains("show")) {
+            toggleMenu();
+        }
+
+        if (!document.startViewTransition) return;
+
+        return new Promise((resolve) => {
+            document.startViewTransition(async () => {
+                resolve();
+                await navigation.complete;
+            });
         });
     });
 </script>
@@ -124,8 +134,9 @@
         <div class="py-6" />
         <div class="py-6" />
     </section>
-
-    <footer class="footer has-background-primary has-text-grey-lighter">
+    <footer
+        class="footer layout-footer has-background-primary has-text-grey-lighter"
+    >
         <div class="content has-text-centered">
             <p>
                 © 2024 <strong class="has-text-white">dvdb</strong>, All rights

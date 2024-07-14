@@ -1,7 +1,9 @@
 <script>
     import BlogPost from "../components/BlogPost.svelte";
 
-    export let data;
+    export let data = {
+        posts: [],
+    };
 </script>
 
 <div class="container">

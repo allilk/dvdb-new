@@ -72,6 +72,7 @@ model VerificationToken {
 
 model BlogPost {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  shortId   String   @unique
   title     String
   content   String
   published Boolean

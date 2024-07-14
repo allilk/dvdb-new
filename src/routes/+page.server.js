@@ -11,10 +11,11 @@ export async function load() {
         },
         take: 3,
         select: {
-            id: true,
+            shortId: true,
             title: true,
             content: true,
             createdAt: true,
+            tags: true,
             author: {
                 select: {
                     name: true,

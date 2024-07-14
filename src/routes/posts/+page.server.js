@@ -9,7 +9,7 @@ export async function load() {
             createdAt: "desc",
         },
         select: {
-            id: true,
+            shortId: true,
             title: true,
             content: true,
             createdAt: true,

@@ -1,7 +1,9 @@
 <script>
     import { goto } from "$app/navigation";
 
-    export let data;
+    export let data = {
+        post: {},
+    };
 </script>
 
 <div class="container">

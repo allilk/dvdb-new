@@ -1,9 +1,15 @@
 <script>
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
+    import AreYouSureModal from "../../components/AreYouSureModal.svelte";
     import BlogPost from "../../components/BlogPost.svelte";
 
-    export let data;
+    export let data = {
+        posts: [],
+    };
+
+    let postToDelete = null;
+    let openDeleteModal = false;
 </script>
 
 <div class="container">
@@ -18,7 +24,21 @@
             {/if}
         </div>
     </div>
+    <AreYouSureModal
+        bind:show={openDeleteModal}
+        title="Delete Post"
+        message="Are you sure you want to delete this post?"
+        on:confirm={(e) => console.log(postToDelete)}
+        on:cancel={() => (openDeleteModal = false)}
+    />
     {#each data.posts as post}
-        <BlogPost {post} />
+        <BlogPost
+            {post}
+            openDeleteModal={(id) => {
+                console.log(postToDelete, openDeleteModal);
+                postToDelete = id;
+                openDeleteModal = true;
+            }}
+        />
     {/each}
 </div>

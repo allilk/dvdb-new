@@ -1,8 +1,12 @@
 import { prisma } from "../../../../auth";
 
+const generateShortId = () => {
+    return Math.random().toString(36).substring(2, 9);
+};
+
 export async function POST(ev) {
     const currentUser = await ev.locals.auth();
-    const { title, content } = await ev.request.json();
+    const { title, content, tags } = await ev.request.json();
 
     if (!title || !content) {
         return new Response("Title and content are required.", {
@@ -14,6 +18,8 @@ export async function POST(ev) {
         data: {
             title,
             content,
+            tags,
+            shortId: generateShortId(),
             published: false,
             author: {
                 connect: {

@@ -2,8 +2,12 @@
     import moment from "moment";
 
     export let post;
+    export let openDeleteModal = (id) => {};
 
-    console.log(post);
+    const toggleDropdown = () => {
+        const dropdown = document.querySelector(`.post-dropdown-${post.id}`);
+        dropdown.classList.toggle("is-active");
+    };
 </script>
 
 <div class="card blog-post">
@@ -23,21 +27,54 @@
                     </u>
                 </p>
             </div>
+
+            <div class={`dropdown post-dropdown-${post.id} is-right`}>
+                <div class="dropdown-trigger">
+                    <button
+                        class="button"
+                        aria-haspopup="true"
+                        aria-controls="dropdown-menu"
+                        on:click={() => toggleDropdown()}
+                    >
+                        <span class="icon is-small">
+                            <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item"> Edit </a>
+                        <a class="dropdown-item"> Share </a>
+                        <hr class="dropdown-divider" />
+                        <button
+                            class="dropdown-item has-text-danger-50"
+                            on:click={() => openDeleteModal(post.id)}
+                        >
+                            Delete</button
+                        >
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="content">
             <p>
                 {post.content.substring(0, 300)}
                 {#if post.content.length > 300}
                     ...
-                    <a href={`/posts/${post.id}`}>Continue Reading -></a>
+                    <a href={`/posts/${post.shortId}`}>Continue Reading -></a>
                 {/if}
             </p>
             <br />
-            <small>{moment(post.createdAt).format("MMMM DD, YYYY ")}</small>
+            <small>{moment(post.createdAt).format("MMMM DD, YYYY ")} </small>
+            <div class="is-pulled-right">
+                <small>
+                    {#each post.tags as tag}
+                        <span class="tag is-primary has-text-white mr-1"
+                            >{tag}</span
+                        >
+                    {/each}</small
+                >
+            </div>
         </div>
     </div>
-    <!-- <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-    </footer> -->
 </div>
