@@ -56,33 +56,35 @@
                 </div>
             </div> -->
         </div>
-        <div class="content">
-            <!-- <p>
-                {post.content.substring(0, 300)}
-                {#if post.content.length > 300}
-                    ...
-                    <a href={`/posts/${post.shortId}`}>Continue Reading -></a>
-                {/if}
-            </p>
-            <br /> -->
-            <!-- <p class="subtitle is-6 is-clickable is-flex mt-2">
-                <figure class="image is-24x24 mr-2">
-                    <img src={post.author.image} alt="Placeholder" />
-                </figure>
-                <u>
-                    {post.author.name}
-                </u>
-            </p> -->
+    </div>
+    <div class="card-footer">
+        <!-- <p>
+            {post.content.substring(0, 300)}
+            {#if post.content.length > 300}
+                ...
+                <a href={`/posts/${post.shortId}`}>Continue Reading -></a>
+            {/if}
+        </p>
+        <br /> -->
+        <!-- <p class="subtitle is-6 is-clickable is-flex mt-2">
+            <figure class="image is-24x24 mr-2">
+                <img src={post.author.image} alt="Placeholder" />
+            </figure>
+            <u>
+                {post.author.name}
+            </u>
+        </p> -->
+        <div class="card-footer-item">
             <small>{moment(post.createdAt).format("MMMM DD, YYYY ")} </small>
-            <div class="is-pulled-right">
-                <small>
-                    {#each post.tags as tag}
-                        <span class="tag is-primary has-text-white mr-1"
-                            >#{tag}</span
-                        >
-                    {/each}</small
-                >
-            </div>
+        </div>
+        <div class="card-footer-item">
+            <small>
+                {#each post.tags as tag}
+                    <span class="tag is-primary has-text-white mr-1"
+                        >#{tag}</span
+                    >
+                {/each}</small
+            >
         </div>
     </div>
 </div>

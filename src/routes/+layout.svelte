@@ -1,7 +1,6 @@
 <script>
     import { page } from "$app/stores";
     import { signOut } from "@auth/sveltekit/client";
-    import { afterNavigate } from "$app/navigation";
     import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
     import { onNavigate } from "$app/navigation";
@@ -72,6 +71,11 @@
             });
         });
     });
+
+    const toggleUserDropdown = () => {
+        const dropdown = document.querySelector(`.layout-dropdown`);
+        dropdown.classList.toggle("is-active");
+    };
 </script>
 
 <div class="container mobile-menu">
@@ -108,11 +112,10 @@
         <div class="hero-foot">
             <div id="homeNavbar" class="navbar-menu px-2 py-1">
                 <div class="navbar-end">
-                    {#each menuLinks as link}
+                    {#each normalUserMenuLinks as link}
                         <a
                             class="navbar-item has-text-grey-lighter"
                             href={link.href}
-                            on:click={() => link.name === "Logout" && signOut()}
                         >
                             {link.name}
                         </a>
@@ -123,6 +126,59 @@
                             <i class="fab fa-discord"></i>
                         </span>
                     </a>
+                    <div class="user-navbar">
+                        {#if $page.data.session}
+                            <div
+                                class={`dropdown layout-dropdown is-right px-3`}
+                            >
+                                <div class="dropdown-trigger">
+                                    <button
+                                        aria-haspopup="true"
+                                        aria-controls="dropdown-menu"
+                                        class="is-flex has-text-grey-lighter"
+                                        on:click={() => toggleUserDropdown()}
+                                    >
+                                        <figure class="image is-32x32 mt-2">
+                                            <img
+                                                src={$page.data.session.user
+                                                    .image}
+                                                class="profile-image"
+                                                alt="USER"
+                                            />
+                                        </figure>
+                                    </button>
+                                </div>
+                                <div
+                                    class="dropdown-menu"
+                                    id="dropdown-menu"
+                                    role="menu"
+                                >
+                                    <div class="dropdown-content">
+                                        <a
+                                            href="/profile"
+                                            class="dropdown-item"
+                                        >
+                                            My Profile
+                                        </a>
+                                        <a
+                                            class="dropdown-item"
+                                            href="my-posts"
+                                        >
+                                            My Posts
+                                        </a>
+
+                                        <hr class="dropdown-divider" />
+                                        <button
+                                            class="dropdown-item"
+                                            on:click={signOut}
+                                        >
+                                            Logout</button
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        {/if}
+                    </div>
                 </div>
             </div>
         </div>

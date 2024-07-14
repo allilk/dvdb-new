@@ -1,4 +1,5 @@
 import { prisma } from "../../auth";
+import { selectNoAuthPostsProps } from "../../lib/posts";
 
 export async function load() {
     const posts = await prisma.blogPost.findMany({
@@ -8,19 +9,7 @@ export async function load() {
         orderBy: {
             createdAt: "desc",
         },
-        select: {
-            shortId: true,
-            title: true,
-            content: true,
-            createdAt: true,
-            tags: true,
-            author: {
-                select: {
-                    name: true,
-                    image: true,
-                },
-            },
-        },
+        select: selectNoAuthPostsProps,
         take: 8,
     });
 

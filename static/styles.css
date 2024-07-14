@@ -8,12 +8,6 @@
     background-color: var(--dvdb-offwhite);
 }
 
-.shopping-cart-button {
-    display: flex;
-    justify-content: space-between;
-    width: 125px;
-}
-
 .bg-dvdb-purple {
     background-color: var(--dvdb-purple);
 }
@@ -77,9 +71,34 @@
     /* border: silver 1px solid; */
 }
 
-.blog-post img {
+.blog-post.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.blog-post .card-footer {
+    margin-top: auto;
+}
+
+.blog-post img,
+.profile-image {
     border-radius: 0.25rem;
 }
+
+.profile-image {
+    border: 2px solid silver;
+}
+
+.profile-image:hover {
+    border-color: white;
+}
+
+/* .user-navbar {
+    position: absolute;
+    left: 0.5rem;
+    top: -2.5rem;
+} */
 
 @media (min-width: 768px) {
     .login-button,
