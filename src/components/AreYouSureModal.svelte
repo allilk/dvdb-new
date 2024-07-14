@@ -19,7 +19,7 @@
 </script>
 
 <div class={`modal ${show ? "is-active" : ""}`}>
-    <div class="modal-background" on:click={cancel}></div>
+    <button class="modal-background" on:click={cancel}></button>
     <div class="modal-card">
         <header class="modal-card-head">
             <p

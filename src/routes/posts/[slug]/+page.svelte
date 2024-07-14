@@ -10,10 +10,10 @@
     <div class="is-flex is-justify-content-space-between">
         <h3 class="title is-3">{data.post.title}</h3>
         <div>
-            <button
+            <!-- <button
                 class="button is-primary has-text-white"
                 on:click={() => goto("/posts")}>Back</button
-            >
+            > -->
         </div>
     </div>
     <div class="box">

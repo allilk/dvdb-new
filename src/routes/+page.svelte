@@ -8,7 +8,11 @@
 
 <div class="container">
     <h3 class="title is-3">Recent Blog Posts</h3>
-    {#each data.posts as post}
-        <BlogPost {post} />
-    {/each}
+    <div class="columns is-tablet is-flex-wrap-wrap">
+        {#each data.posts as post}
+            <div class="column is-one-third">
+                <BlogPost {post} />
+            </div>
+        {/each}
+    </div>
 </div>

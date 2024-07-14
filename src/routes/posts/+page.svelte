@@ -31,14 +31,18 @@
         on:confirm={(e) => console.log(postToDelete)}
         on:cancel={() => (openDeleteModal = false)}
     />
-    {#each data.posts as post}
-        <BlogPost
-            {post}
-            openDeleteModal={(id) => {
-                console.log(postToDelete, openDeleteModal);
-                postToDelete = id;
-                openDeleteModal = true;
-            }}
-        />
-    {/each}
+    <div class="columns is-flex-wrap-wrap">
+        {#each data.posts as post}
+            <div class="column is-one-third">
+                <BlogPost
+                    {post}
+                    openDeleteModal={(id) => {
+                        console.log(postToDelete, openDeleteModal);
+                        postToDelete = id;
+                        openDeleteModal = true;
+                    }}
+                />
+            </div>
+        {/each}
+    </div>
 </div>

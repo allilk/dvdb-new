@@ -1,4 +1,5 @@
 <script>
+    import { goto } from "$app/navigation";
     import moment from "moment";
 
     export let post;
@@ -10,25 +11,24 @@
     };
 </script>
 
-<div class="card blog-post">
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+    class="card blog-post is-clickable"
+    on:click={goto(`/posts/${post.shortId}`)}
+>
+    <figure class="image is-16by9">
+        <img src="https://placehold.co/1280x720/png" alt="Placeholder" />
+    </figure>
     <div class="card-content">
         <div class="media">
-            <div class="media-left">
-                <figure class="image is-64x64">
-                    <img src={post.author.image} alt="Placeholder" />
-                </figure>
-            </div>
             <div class="media-content">
-                <p class="title is-3 mb-1">{post.title}</p>
-                <p class="subtitle is-6 is-clickable">
-                    posted by{" "}
-                    <u>
-                        {post.author.name}
-                    </u>
+                <p class="subtitle is-4 mb-1 has-text-weight-semibold">
+                    {post.title}
                 </p>
             </div>
 
-            <div class={`dropdown post-dropdown-${post.id} is-right`}>
+            <!-- <div class={`dropdown post-dropdown-${post.id} is-right`}>
                 <div class="dropdown-trigger">
                     <button
                         class="button"
@@ -54,23 +54,31 @@
                         >
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="content">
-            <p>
+            <!-- <p>
                 {post.content.substring(0, 300)}
                 {#if post.content.length > 300}
                     ...
                     <a href={`/posts/${post.shortId}`}>Continue Reading -></a>
                 {/if}
             </p>
-            <br />
+            <br /> -->
+            <!-- <p class="subtitle is-6 is-clickable is-flex mt-2">
+                <figure class="image is-24x24 mr-2">
+                    <img src={post.author.image} alt="Placeholder" />
+                </figure>
+                <u>
+                    {post.author.name}
+                </u>
+            </p> -->
             <small>{moment(post.createdAt).format("MMMM DD, YYYY ")} </small>
             <div class="is-pulled-right">
                 <small>
                     {#each post.tags as tag}
                         <span class="tag is-primary has-text-white mr-1"
-                            >{tag}</span
+                            >#{tag}</span
                         >
                     {/each}</small
                 >

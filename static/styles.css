@@ -74,6 +74,11 @@
 
 .blog-post {
     /* --bulma-card-shadow: none; */
+    /* border: silver 1px solid; */
+}
+
+.blog-post img {
+    border-radius: 0.25rem;
 }
 
 @media (min-width: 768px) {
