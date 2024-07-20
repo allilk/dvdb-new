@@ -1,6 +1,5 @@
 <script>
     import { page } from "$app/stores";
-    import { onMount } from "svelte";
     import BlogPost from "../../components/BlogPost.svelte";
     import { goto } from "$app/navigation";
     import { afterNavigate } from "$app/navigation";
@@ -8,7 +7,6 @@
     let myPosts = [];
     let currentPage = 1;
     let pages = 1;
-    let promise;
 
     const currentUser = $page.data.session.user;
 
@@ -33,6 +31,12 @@
 
 <div class="container">
     <h3 class="title is-3">My Blog Posts</h3>
+    <button
+        class="button is-primary has-text-white mb-1"
+        on:click={() => goto("/my-posts/images")}
+    >
+        Upload images
+    </button>
     {#await myPosts}
         <p>Loading...</p>
     {:then posts}

@@ -28,9 +28,9 @@
         },
     ];
     let menuLinks = normalUserMenuLinks;
-
+    const currentUser = $page.data.session ? $page.data.session.user : null;
     $: menuLinks = normalUserMenuLinks.concat(
-        $page.data.session ? loggedInMenuLinks : unloggedInMenuLinks
+        currentUser ? loggedInMenuLinks : unloggedInMenuLinks
     );
 
     const toggleMenu = () => {
@@ -160,13 +160,14 @@
                                         >
                                             My Profile
                                         </a>
-                                        <a
-                                            class="dropdown-item"
-                                            href="my-posts"
-                                        >
-                                            My Posts
-                                        </a>
-
+                                        {#if currentUser?.roles.includes("Blogger") || currentUser?.roles.includes("Admin")}
+                                            <a
+                                                href="/my-posts"
+                                                class="dropdown-item"
+                                            >
+                                                My Posts
+                                            </a>
+                                        {/if}
                                         <hr class="dropdown-divider" />
                                         <button
                                             class="dropdown-item"
