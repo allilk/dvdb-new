@@ -1,9 +1,10 @@
 <script>
     import { page } from "$app/stores";
-    import { signOut } from "@auth/sveltekit/client";
     import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
     import { onNavigate } from "$app/navigation";
+    import UserMenu from "../components/UserMenu.svelte";
+    import { signOut } from "@auth/sveltekit/client";
 
     const normalUserMenuLinks = [
         {
@@ -27,6 +28,7 @@
             href: "/",
         },
     ];
+
     let menuLinks = normalUserMenuLinks;
     const currentUser = $page.data.session ? $page.data.session.user : null;
     $: menuLinks = normalUserMenuLinks.concat(
@@ -71,11 +73,6 @@
             });
         });
     });
-
-    const toggleUserDropdown = () => {
-        const dropdown = document.querySelector(`.layout-dropdown`);
-        dropdown.classList.toggle("is-active");
-    };
 </script>
 
 <div class="container mobile-menu">
@@ -99,20 +96,29 @@
 
 <div class="container main">
     <section class="hero is-primary layout-hero">
-        <div class="hero-body is-flex">
+        <div class="hero-body is-flex is-relative">
             <a class="is-clickable" href="/">
                 <p class="title has-text-white">dvdb</p>
                 <p class="subtitle ml-2 has-text-grey-lighter">
                     preserved for the future.
                 </p>
             </a>
-            <BurgerMenu {toggleMenu} />
+            {#if currentUser}
+                <div class="is-hidden-desktop">
+                    <UserMenu
+                        mobileMenuLinks={normalUserMenuLinks}
+                        dropdownClass="mobile-dropdown"
+                    />
+                </div>
+            {:else}
+                <BurgerMenu {toggleMenu} />
+            {/if}
         </div>
 
         <div class="hero-foot">
             <div id="homeNavbar" class="navbar-menu px-2 py-1">
                 <div class="navbar-end">
-                    {#each normalUserMenuLinks as link}
+                    {#each normalUserMenuLinks.concat(!currentUser ? unloggedInMenuLinks : []) as link}
                         <a
                             class="navbar-item has-text-grey-lighter"
                             href={link.href}
@@ -127,57 +133,8 @@
                         </span>
                     </a>
                     <div class="user-navbar">
-                        {#if $page.data.session}
-                            <div
-                                class={`dropdown layout-dropdown is-right px-3`}
-                            >
-                                <div class="dropdown-trigger">
-                                    <button
-                                        aria-haspopup="true"
-                                        aria-controls="dropdown-menu"
-                                        class="is-flex has-text-grey-lighter"
-                                        on:click={() => toggleUserDropdown()}
-                                    >
-                                        <figure class="image is-32x32 mt-2">
-                                            <img
-                                                src={$page.data.session.user
-                                                    .image}
-                                                class="profile-image"
-                                                alt="USER"
-                                            />
-                                        </figure>
-                                    </button>
-                                </div>
-                                <div
-                                    class="dropdown-menu"
-                                    id="dropdown-menu"
-                                    role="menu"
-                                >
-                                    <div class="dropdown-content">
-                                        <a
-                                            href="/profile"
-                                            class="dropdown-item"
-                                        >
-                                            My Profile
-                                        </a>
-                                        {#if currentUser?.roles.includes("Blogger") || currentUser?.roles.includes("Admin")}
-                                            <a
-                                                href="/my-posts"
-                                                class="dropdown-item"
-                                            >
-                                                My Posts
-                                            </a>
-                                        {/if}
-                                        <hr class="dropdown-divider" />
-                                        <button
-                                            class="dropdown-item"
-                                            on:click={signOut}
-                                        >
-                                            Logout</button
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+                        {#if currentUser}
+                            <UserMenu />
                         {/if}
                     </div>
                 </div>

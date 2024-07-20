@@ -94,6 +94,10 @@
     border-color: white;
 }
 
+.mobile-dropdown {
+    position: absolute;
+    right: 0.5rem;
+}
 /* .user-navbar {
     position: absolute;
     left: 0.5rem;
