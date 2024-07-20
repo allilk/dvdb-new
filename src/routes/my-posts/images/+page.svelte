@@ -58,8 +58,6 @@
         const data = await response.json();
 
         myImages = data;
-
-        console.log(myImages, currentUser);
     });
 </script>
 

@@ -52,7 +52,6 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
             }
 
             if (account) {
-                console.log(user);
                 token.roles = user?.roles || [];
                 token.id = user.id;
             }

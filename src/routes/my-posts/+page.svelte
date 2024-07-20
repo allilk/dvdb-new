@@ -16,7 +16,7 @@
 
         myPosts = [];
 
-        promise = getNextPage(currentPage);
+        getNextPage(currentPage);
     });
 
     const getNextPage = (page) =>

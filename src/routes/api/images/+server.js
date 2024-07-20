@@ -1,4 +1,4 @@
-import { listObjectsByPrefix } from "../../../lib/s3.js";
+import { listObjectsByPrefix } from "$lib/server/s3";
 
 export async function GET({ url }) {
     const userId = url.searchParams.get("userId");

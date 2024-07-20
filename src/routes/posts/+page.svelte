@@ -37,7 +37,6 @@
                 <BlogPost
                     {post}
                     openDeleteModal={(id) => {
-                        console.log(postToDelete, openDeleteModal);
                         postToDelete = id;
                         openDeleteModal = true;
                     }}

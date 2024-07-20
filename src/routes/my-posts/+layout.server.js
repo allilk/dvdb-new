@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit";
-import { canUserBlogPost } from "../../lib/roles.js";
+import { canUserBlogPost } from "$lib/roles";
 
 export const load = async (event) => {
     const session = await event.locals.auth();
