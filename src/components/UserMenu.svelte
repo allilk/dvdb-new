@@ -2,24 +2,25 @@
     import { onNavigate } from "$app/navigation";
     import { page } from "$app/stores";
     import { signOut } from "@auth/sveltekit/client";
+    import { sineInOut } from "svelte/easing";
+    import { scale } from "svelte/transition";
 
     const currentUser = $page.data.session.user;
     export let mobileMenuLinks = [];
-    export let dropdownClass = "layout-dropdown";
+    export let dropdownClass = "";
+    let showDropdown = false;
 
     const toggleUserDropdown = () => {
-        const dropdown = document.querySelector(`.${dropdownClass}`);
-        dropdown.classList.toggle("is-active");
+        showDropdown = !showDropdown;
     };
 
     onNavigate(() => {
         // close the dropdown when navigating
-        const dropdown = document.querySelector(`.${dropdownClass}`);
-        dropdown.classList.remove("is-active");
+        showDropdown = false;
     });
 </script>
 
-<div class={`dropdown ${dropdownClass} is-right px-3`}>
+<div class={`dropdown is-active is-right px-3 ${dropdownClass}`}>
     <div class="dropdown-trigger">
         <button
             aria-haspopup="true"
@@ -34,20 +35,34 @@
             </figure>
         </button>
     </div>
-    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-            {#if mobileMenuLinks.length > 0}
-                {#each mobileMenuLinks as link}
-                    <a class="dropdown-item" href={link.href}>{link.name}</a>
-                {/each}
+    {#if showDropdown}
+        <div
+            class="dropdown-menu"
+            id="dropdown-menu"
+            role="menu"
+            transition:scale={{
+                duration: 200,
+                delay: 0,
+                easing: sineInOut,
+            }}
+        >
+            <div class="dropdown-content">
+                {#if mobileMenuLinks.length > 0}
+                    {#each mobileMenuLinks as link}
+                        <a class="dropdown-item" href={link.href}>{link.name}</a
+                        >
+                    {/each}
+                    <hr class="dropdown-divider" />
+                {/if}
+                <a href="/profile" class="dropdown-item"> My Profile </a>
+                {#if currentUser?.roles.includes("Blogger") || currentUser?.roles.includes("Admin")}
+                    <a href="/my-posts" class="dropdown-item"> My Posts </a>
+                {/if}
                 <hr class="dropdown-divider" />
-            {/if}
-            <a href="/profile" class="dropdown-item"> My Profile </a>
-            {#if currentUser?.roles.includes("Blogger") || currentUser?.roles.includes("Admin")}
-                <a href="/my-posts" class="dropdown-item"> My Posts </a>
-            {/if}
-            <hr class="dropdown-divider" />
-            <button class="dropdown-item" on:click={signOut}> Logout</button>
+                <button class="dropdown-item" on:click={signOut}>
+                    Logout</button
+                >
+            </div>
         </div>
-    </div>
+    {/if}
 </div>
