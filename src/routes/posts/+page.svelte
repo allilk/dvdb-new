@@ -2,7 +2,7 @@
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
     import AreYouSureModal from "../../components/AreYouSureModal.svelte";
-    import BlogPost from "../../components/BlogPost.svelte";
+    import BlogPost from "../../components/blog/BlogPost.svelte";
 
     export let data = {
         posts: [],

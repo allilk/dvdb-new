@@ -1,39 +1,47 @@
 <script>
+    import moment from "moment";
+    import { Carta, Markdown } from "carta-md";
+
     export let data = {
         post: {},
     };
+
+    const carta = new Carta();
 </script>
 
-<div class="container">
-    <div class="is-flex is-justify-content-space-between">
-        <h3 class="title is-3">{data.post.title}</h3>
-        <div>
-            <!-- <button
-                class="button is-primary has-text-white"
-                on:click={() => goto("/posts")}>Back</button
-            > -->
+<div class="container blog-post-page is-flex is-flex-direction-column">
+    <div class="columns">
+        <div class="column">
+            <h1 class="title">{data.post?.title}</h1>
+            <p>{data.post?.description}</p>
         </div>
-    </div>
-    <div class="box">
-        <article class="media">
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <small
-                            ><u>
-                                {data.post.author.name}
-                            </u></small
-                        >
-                        <small
-                            >{new Date(
-                                data.post.createdAt
-                            ).toLocaleDateString()}</small
-                        >
-                        <br />
-                        {data.post.content}
+        <div class="column is-two-fifths">
+            <figure class="image is-16by9">
+                <img
+                    src={data.post?.image ||
+                        "https://placehold.co/1280x720/png"}
+                    alt="Placeholder"
+                />
+            </figure>
+            <div class="columns pt-1">
+                <div class="column is-half">
+                    <p class="is-size-7 has-text-grey-light">
+                        {moment(data.post?.createdAt).format("MMMM Do, YYYY")}
                     </p>
                 </div>
+                <div
+                    class="column is-flex is-justify-content-end is-flex-wrap-wrap pb-0"
+                >
+                    {#each data.post?.tags as tag}
+                        <span class="tag is-primary has-text-white mr-1 mb-1"
+                            >#{tag}</span
+                        >
+                    {/each}
+                </div>
             </div>
-        </article>
+        </div>
+    </div>
+    <div class="content">
+        <Markdown {carta} value={data.post?.content} />
     </div>
 </div>

@@ -1,4 +1,8 @@
 <script>
+    import "bulma/css/bulma.css";
+    import "carta-md/default.css";
+    import "@cartamd/plugin-emoji/default.css";
+
     import { page } from "$app/stores";
     import { onMount } from "svelte";
     import { onNavigate } from "$app/navigation";
@@ -141,7 +145,7 @@
             </div>
         </div>
     </section>
-    <section class="layout-section section has-background-white pb-6">
+    <section class="layout-section section has-background-white pb-6 pt-5 px-5">
         <slot />
         <div class="py-6" />
         <div class="py-6" />

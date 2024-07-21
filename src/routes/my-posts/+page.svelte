@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores";
-    import BlogPost from "../../components/BlogPost.svelte";
+    import BlogPost from "../../components/blog/BlogPost.svelte";
     import { goto } from "$app/navigation";
     import { afterNavigate } from "$app/navigation";
 

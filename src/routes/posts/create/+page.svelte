@@ -1,18 +1,27 @@
 <script>
     import { goto } from "$app/navigation";
     import { toast } from "bulma-toast";
-    import CreateEditPostForm from "../../../components/CreateEditPostForm.svelte";
+    import CreateEditPostForm from "../../../components/blog/CreateEditPostForm.svelte";
 
     let title = "";
     let image = "";
     let content = "";
     let tags = [];
+    let description = "";
 
     let requestLoading = false;
 
     const createPost = async () => {
         if (requestLoading) return;
-        if (!title || !content || tags.length === 0) {
+        if (description.length > 1000) {
+            toast({
+                message: "Description is too long.",
+                type: "is-danger",
+                animate: { in: "slideInRight", out: "slideOutRight" },
+            });
+            return;
+        }
+        if (!title || !content || !description || tags.length === 0) {
             toast({
                 message: "Please fill in all fields.",
                 type: "is-danger",
@@ -32,6 +41,7 @@
                 content,
                 tags,
                 image,
+                description,
             }),
         });
 
@@ -59,6 +69,7 @@
     bind:image
     bind:tags
     bind:content
+    bind:description
     {requestLoading}
     postFunction={createPost}
 />

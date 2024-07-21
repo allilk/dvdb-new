@@ -1,5 +1,5 @@
 <script>
-    import BlogPost from "../components/BlogPost.svelte";
+    import BlogPost from "../components/blog/BlogPost.svelte";
 
     export let data = {
         posts: [],

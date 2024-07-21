@@ -2,6 +2,7 @@ export const selectNoAuthPostsProps = {
     shortId: true,
     title: true,
     image: true,
+    description: true,
     content: true,
     createdAt: true,
     tags: true,

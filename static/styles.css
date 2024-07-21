@@ -1,15 +1,19 @@
 :root {
     --dvdb-purple: #22223b;
     --dvdb-offwhite: #edf2f7;
-    --bulma-primary-h: 240deg;
-    --bulma-primary-s: 27%;
-    --bulma-primary-l: 18%;
+    --bulma-primary-h: 240deg !important;
+    --bulma-primary-s: 27% !important;
+    --bulma-primary-l: 18% !important;
 
     background-color: var(--dvdb-offwhite);
 }
 
+textarea {
+    resize: none;
+}
+
 .bg-dvdb-purple {
-    background-color: var(--dvdb-purple);
+    background-color: var(--dvdb-purple) !important;
 }
 
 #homeNavbar {
@@ -86,8 +90,20 @@
     border-radius: 0.25rem;
 }
 
-.blog-post img {
+.blog-post img,
+.blog-post-page img {
     object-fit: cover;
+}
+
+.blog-post .tags {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-post-page > :first-child {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .profile-image {
@@ -99,7 +115,7 @@
 }
 
 .mobile-dropdown {
-    position: absolute;
+    position: absolute !important;
     right: 0.5rem;
 }
 /* .user-navbar {
@@ -127,6 +143,10 @@
 
     .layout-section {
         --bulma-section-padding: 3rem 1.5rem;
+    }
+
+    .blog-post-page > :first-child {
+        flex-direction: row;
     }
 }
 

@@ -80,7 +80,7 @@
         <div class="card-footer-item">
             <small>{moment(post.createdAt).format("MMMM DD, YYYY ")} </small>
         </div>
-        <div class="card-footer-item">
+        <div class="card-footer-item tags">
             <small>
                 {#each post.tags as tag}
                     <span class="tag is-primary has-text-white mr-1 mb-1"

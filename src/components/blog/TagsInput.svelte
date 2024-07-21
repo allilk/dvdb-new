@@ -24,6 +24,9 @@
     }
 
     function createTags(tags, tag) {
+        if (tags.length >= 5) {
+            return tags;
+        }
         return [...new Set([...tags, tag])];
     }
 </script>
@@ -40,14 +43,11 @@
         </span>
     {/each}
 </div>
-<div class="field">
-    <div class="control">
-        <input
-            class="input"
-            type="text"
-            placeholder="Add a tag"
-            on:keydown={addTag}
-            {disabled}
-        />
-    </div>
-</div>
+
+<input
+    class="input"
+    type="text"
+    placeholder="Add a tag"
+    on:keydown={addTag}
+    {disabled}
+/>

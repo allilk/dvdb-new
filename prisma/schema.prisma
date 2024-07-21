@@ -76,6 +76,7 @@ model BlogPost {
   shortId   String   @unique
   title     String
   image     String   @default("")
+  description String @default("")
   content   String
   published Boolean
   author    User     @relation(fields: [authorId], references: [id])

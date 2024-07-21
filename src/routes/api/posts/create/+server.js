@@ -6,18 +6,28 @@ const generateShortId = () => {
 
 export async function POST(ev) {
     const currentUser = await ev.locals.auth();
-    const { title, content, tags, image } = await ev.request.json();
+    const { title, content, tags, image, description } =
+        await ev.request.json();
 
-    if (!title || !content) {
-        return new Response("Title and content are required.", {
-            status: 400,
-        });
+    if (
+        !title ||
+        !content ||
+        !description ||
+        !tags ||
+        !image ||
+        description.length > 1000
+    ) {
+        return new Response(
+            "Title, content, description, tags, and image are required. Description must be less than 1000 characters.",
+            { status: 400 }
+        );
     }
 
     const post = await prisma.blogPost.create({
         data: {
             title,
             content,
+            description,
             tags,
             image,
             shortId: generateShortId(),
@@ -36,12 +46,21 @@ export async function POST(ev) {
 }
 
 export async function PUT(ev) {
-    const { shortId, title, content, tags, image } = await ev.request.json();
+    const { shortId, title, content, tags, image, description } =
+        await ev.request.json();
 
-    if (!title || !content) {
-        return new Response("Title and content are required.", {
-            status: 400,
-        });
+    if (
+        !title ||
+        !content ||
+        !description ||
+        !tags ||
+        !image ||
+        description.length > 1000
+    ) {
+        return new Response(
+            "Title, content, description, tags, and image are required. Description must be less than 1000 characters.",
+            { status: 400 }
+        );
     }
 
     const post = await prisma.blogPost.update({
@@ -53,6 +72,7 @@ export async function PUT(ev) {
             content,
             tags,
             image,
+            description,
         },
     });
 

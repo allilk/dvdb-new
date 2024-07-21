@@ -1,6 +1,6 @@
 <script>
     import { toast } from "bulma-toast";
-    import CreateEditPostForm from "../../../../components/CreateEditPostForm.svelte";
+    import CreateEditPostForm from "../../../../components/blog/CreateEditPostForm.svelte";
     import { goto } from "$app/navigation";
 
     export let data = {
@@ -11,11 +11,20 @@
     let image = data.post.image || "";
     let content = data.post.content || "";
     let tags = data.post.tags || [];
+    let description = data.post.description || "";
     let requestLoading = false;
 
     export const editPost = async () => {
         if (requestLoading) return;
-        if (!title || !content || tags.length === 0) {
+        if (description.length > 1000) {
+            toast({
+                message: "Description is too long.",
+                type: "is-danger",
+                animate: { in: "slideInRight", out: "slideOutRight" },
+            });
+            return;
+        }
+        if (!title || !content || !description || tags.length === 0) {
             toast({
                 message: "Please fill in all fields.",
                 type: "is-danger",
@@ -35,6 +44,7 @@
                 content,
                 tags,
                 image,
+                description,
                 shortId: data.post.shortId,
             }),
         });
@@ -56,8 +66,6 @@
 
         requestLoading = false;
     };
-
-    $: console.log(image);
 </script>
 
 <CreateEditPostForm
@@ -65,6 +73,7 @@
     bind:image
     bind:tags
     bind:content
+    bind:description
     {requestLoading}
     postFunction={editPost}
 />
