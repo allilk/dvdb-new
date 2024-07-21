@@ -54,7 +54,7 @@ textarea {
     background-color: var(--dvdb-purple);
     overflow: hidden;
     color: white;
-    position: absolute;
+    position: absolute !important;
     top: 0;
     left: 0;
     width: 100%;

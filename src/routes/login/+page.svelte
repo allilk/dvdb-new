@@ -2,50 +2,53 @@
     import { signIn } from "@auth/sveltekit/client";
 </script>
 
-<div class="container login-fields">
-    <div class="field">
-        <label class="label" for="username">Username</label>
-        <div class="control has-icons-left has-icons-right">
-            <input
-                class="input is-primary"
-                type="text"
-                placeholder="Username"
-                value=""
-                id="username"
-            />
-            <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-            </span>
-            <!-- <span class="icon is-small is-right">
+<div class="container login-fields columns is-centered">
+    <div class="is-half column p-0">
+        <div class="field">
+            <label class="label" for="username">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                <input
+                    class="input is-primary"
+                    type="text"
+                    placeholder="Username"
+                    value=""
+                    id="username"
+                />
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+                <!-- <span class="icon is-small is-right">
                 <i class="fas fa-check"></i>
             </span> -->
+            </div>
+            <!-- <p class="help is-success">This username is available</p> -->
         </div>
-        <!-- <p class="help is-success">This username is available</p> -->
-    </div>
-    <div class="field">
-        <label class="label" for="password">Password</label>
-        <p class="control has-icons-left">
-            <input
-                class="input is-primary"
-                type="password"
-                placeholder="Password"
-                value=""
-                id="password"
-            />
-            <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-            </span>
-        </p>
-    </div>
-    <div class="field has-text-centered mb-1">
-        <button class="button is-primary has-text-white login-button"
-            >Login</button
-        >
-    </div>
-    <hr class="login-hr" />
-    <div class="field has-text-centered mt-1">
-        <button class="button login-button" on:click={() => signIn("discord")}
-            >Login With Discord</button
-        >
+        <div class="field">
+            <label class="label" for="password">Password</label>
+            <p class="control has-icons-left">
+                <input
+                    class="input is-primary"
+                    type="password"
+                    placeholder="Password"
+                    value=""
+                    id="password"
+                />
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field has-text-centered mb-1">
+            <button class="button is-primary has-text-white login-button"
+                >Login</button
+            >
+        </div>
+        <hr class="login-hr" />
+        <div class="field has-text-centered mt-1">
+            <button
+                class="button login-button"
+                on:click={() => signIn("discord")}>Login With Discord</button
+            >
+        </div>
     </div>
 </div>
