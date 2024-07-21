@@ -1,7 +1,7 @@
 // GET request for /api/posts
 
 import { prisma } from "../../../auth.js";
-import { selectNoAuthPostsProps } from "../../../lib/posts.js";
+import { selectNoAuthPostsProps } from "$lib/posts.js";
 
 export async function GET(ev) {
     // Return a list of post based on the query parameters

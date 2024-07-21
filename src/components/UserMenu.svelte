@@ -41,7 +41,7 @@
             id="dropdown-menu"
             role="menu"
             transition:scale={{
-                duration: 200,
+                duration: 100,
                 delay: 0,
                 easing: sineInOut,
             }}
@@ -57,6 +57,9 @@
                 <a href="/profile" class="dropdown-item"> My Profile </a>
                 {#if currentUser?.roles.includes("Blogger") || currentUser?.roles.includes("Admin")}
                     <a href="/my-posts" class="dropdown-item"> My Posts </a>
+                    <a href="/my-posts/images" class="dropdown-item">
+                        My Images
+                    </a>
                 {/if}
                 <hr class="dropdown-divider" />
                 <button class="dropdown-item" on:click={signOut}>

@@ -18,7 +18,10 @@
     on:click={goto(`/posts/${post.shortId}`)}
 >
     <figure class="image is-16by9">
-        <img src="https://placehold.co/1280x720/png" alt="Placeholder" />
+        <img
+            src={post?.image || "https://placehold.co/1280x720/png"}
+            alt="Placeholder"
+        />
     </figure>
     <div class="card-content">
         <div class="media">
@@ -80,7 +83,7 @@
         <div class="card-footer-item">
             <small>
                 {#each post.tags as tag}
-                    <span class="tag is-primary has-text-white mr-1"
+                    <span class="tag is-primary has-text-white mr-1 mb-1"
                         >#{tag}</span
                     >
                 {/each}</small

@@ -1,16 +1,19 @@
 <script>
-    import { goto } from "$app/navigation";
     import { toast } from "bulma-toast";
-    import CreateEditPostForm from "../../../components/CreateEditPostForm.svelte";
+    import CreateEditPostForm from "../../../../components/CreateEditPostForm.svelte";
+    import { goto } from "$app/navigation";
 
-    let title = "";
-    let image = "";
-    let content = "";
-    let tags = [];
+    export let data = {
+        post: [],
+    };
 
+    let title = data.post.title || "";
+    let image = data.post.image || "";
+    let content = data.post.content || "";
+    let tags = data.post.tags || [];
     let requestLoading = false;
 
-    const createPost = async () => {
+    export const editPost = async () => {
         if (requestLoading) return;
         if (!title || !content || tags.length === 0) {
             toast({
@@ -22,8 +25,8 @@
         }
 
         requestLoading = true;
-        const res = await fetch("/api/posts/create", {
-            method: "POST",
+        const res = await fetch(`/api/posts/create`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -32,19 +35,20 @@
                 content,
                 tags,
                 image,
+                shortId: data.post.shortId,
             }),
         });
 
         if (res.ok) {
             toast({
-                message: "Post created successfully!",
+                message: "Post updated successfully!",
                 type: "is-success",
                 animate: { in: "slideInRight", out: "slideOutRight" },
             });
-            goto("/posts");
+            goto(`/posts/${data.post.shortId}`);
         } else {
             toast({
-                message: "Failed to create post.",
+                message: "Failed to update post.",
                 type: "is-danger",
                 animate: { in: "slideInRight", out: "slideOutRight" },
             });
@@ -52,6 +56,8 @@
 
         requestLoading = false;
     };
+
+    $: console.log(image);
 </script>
 
 <CreateEditPostForm
@@ -60,5 +66,5 @@
     bind:tags
     bind:content
     {requestLoading}
-    postFunction={createPost}
+    postFunction={editPost}
 />

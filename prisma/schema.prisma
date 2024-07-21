@@ -75,6 +75,7 @@ model BlogPost {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   shortId   String   @unique
   title     String
+  image     String   @default("")
   content   String
   published Boolean
   author    User     @relation(fields: [authorId], references: [id])

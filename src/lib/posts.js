@@ -1,6 +1,7 @@
 export const selectNoAuthPostsProps = {
     shortId: true,
     title: true,
+    image: true,
     content: true,
     createdAt: true,
     tags: true,
@@ -13,14 +14,7 @@ export const selectNoAuthPostsProps = {
 };
 
 export const selectOwnUserPostsProps = {
-    title: true,
-    content: true,
-    createdAt: true,
-    tags: true,
-    author: {
-        select: {
-            name: true,
-            image: true,
-        },
-    },
+    ...selectNoAuthPostsProps,
+    published: true,
+    id: true,
 };
