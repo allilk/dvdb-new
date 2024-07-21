@@ -86,6 +86,10 @@
     border-radius: 0.25rem;
 }
 
+.blog-post img {
+    object-fit: cover;
+}
+
 .profile-image {
     border: 2px solid silver;
 }
@@ -103,6 +107,10 @@
     left: 0.5rem;
     top: -2.5rem;
 } */
+
+#gallery .column {
+    padding: 0;
+}
 
 @media (min-width: 768px) {
     .login-button,

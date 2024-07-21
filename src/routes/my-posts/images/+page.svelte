@@ -2,12 +2,14 @@
     import { toast } from "bulma-toast";
     import { page } from "$app/stores";
     import { onMount } from "svelte";
+    import Gallery from "svelte-image-gallery";
+    import LoadingSpinner from "../../../components/LoadingSpinner.svelte";
 
     let image = null;
     let imageUploadLoading = false;
     let imageURL = "";
 
-    let myImages = [];
+    let myImages = new Promise(() => {});
 
     const currentUser = $page.data.session.user;
 
@@ -54,10 +56,9 @@
     };
 
     onMount(async () => {
-        const response = await fetch(`/api/images?userId=${currentUser.id}`);
-        const data = await response.json();
-
-        myImages = data;
+        myImages = fetch(`/api/images?userId=${currentUser.id}`).then((res) =>
+            res.json()
+        );
     });
 </script>
 
@@ -105,16 +106,33 @@
 </div>
 
 <h4 class="title is-4 has-text-centered">Your Images</h4>
-{#if myImages.length === 0}
-    <p>No images found.</p>
-{:else}
-    <div class="columns is-multiline">
-        {#each myImages || [] as image}
-            <div class="column is-one-quarter">
-                <figure class="image is-1by1">
-                    <img src={image.url} alt={image.key} />
-                </figure>
-            </div>
-        {/each}
-    </div>
-{/if}
+{#await myImages}
+    <LoadingSpinner />
+{:then images}
+    {#if myImages.length === 0}
+        <p>No images found.</p>
+    {:else}
+        <Gallery
+            gap="8"
+            hover
+            loading={false}
+            on:click={(e) => {
+                // copy to clipboard and show a toast
+                navigator.clipboard.writeText(e.detail.src);
+                toast({
+                    message: "Image URL copied to clipboard!",
+                    type: "is-success",
+                    animate: {
+                        in: "slideInRight",
+                        out: "slideOutRight",
+                    },
+                    duration: 1000,
+                });
+            }}
+        >
+            {#each images || [] as image}
+                <img src={image.url} alt={image.key} />
+            {/each}
+        </Gallery>
+    {/if}
+{/await}

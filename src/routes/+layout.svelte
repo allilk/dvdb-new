@@ -1,8 +1,8 @@
 <script>
     import { page } from "$app/stores";
-    import BurgerMenu from "../components/BurgerMenu.svelte";
     import { onMount } from "svelte";
     import { onNavigate } from "$app/navigation";
+    import BurgerMenu from "../components/BurgerMenu.svelte";
     import UserMenu from "../components/UserMenu.svelte";
     import { signOut } from "@auth/sveltekit/client";
 

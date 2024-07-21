@@ -18,6 +18,8 @@
         "globals": "^15.0.0",
         "prisma": "^5.16.2",
         "svelte": "^4.2.7",
+        "svelte-image-gallery": "^1.7.1",
+        "svelte-loading-spinners": "^0.3.6",
         "vite": "^5.0.3"
     },
     "type": "module",
